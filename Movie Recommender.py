@@ -3,10 +3,14 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 import pickle
+import gzip
 import ast
 import zipfile
 import io
 import pandas as pd
+
+st.header("DO NOT RUN THIS PAGE DIRECTLY")
+st.subheader("For the recommender to work, please run the file tfidf.py for the required pickle file to be created.")
 
 x = st.text_input("Movie Title")
 st.write(f'Looking for recommendations if you like the movie: {x} ...')
@@ -27,8 +31,12 @@ elif x not in list(movies1["original_title"]):
     st.subheader(f"Sorry, {x} is not in the database. Make sure your spelling and punctuation are correct, or try a different movie.")
 else:
     # Load the cosine similarity matrix
-    with open('/Users/beatrizrodriguez/Desktop/MoviesRecommend/cosine_sim.pkl', 'rb') as file:
-        cosine_sim_reduced_dim = pickle.load(file)
+    # with open('/Users/beatrizrodriguez/Desktop/MoviesRecommend/cosine_sim.pkl', 'rb') as file:
+    #     cosine_sim_reduced_dim = pickle.load(file)
+
+    # Load a compressed pickle file
+    with gzip.open('file.pkl.gz', 'rb') as f:
+        your_data = pickle.load(f)
 
 
     def get_content_based_recommendations(title, num_recommendations=5):
