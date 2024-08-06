@@ -4,11 +4,22 @@ import numpy as np
 import plotly.graph_objects as go
 import pickle
 import ast
+import zipfile
+import io
+import pandas as pd
 
 x = st.text_input("Movie Title")
 st.write(f'Looking for recommendations if you like the movie: {x} ...')
 
-movies1 = pd.read_csv('/Users/beatrizrodriguez/Desktop/MoviesRecommend/processed_movies.csv')
+zip_file_path1 = 'movies1.csv.zip'
+csv_file_name1 = 'movies1.csv'
+zip_file_path2 = 'processed_movies.csv.zip'
+csv_file_name2 = 'processed_movies.csv'
+
+with zipfile.ZipFile(zip_file_path2, 'r') as z:
+    with z.open(csv_file_name2) as f:
+        movies1 = pd.read_csv(f)
+# movies1 = pd.read_csv('/Users/beatrizrodriguez/Desktop/MoviesRecommend/processed_movies.csv')
 
 if x == '':
     st.write("")
