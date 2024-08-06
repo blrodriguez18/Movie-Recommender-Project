@@ -1,4 +1,4 @@
-# project1
+# Movie Recommender Project
 
 ## DO NOT RUN THE "MOVIE RECOMMENDER" PAGE on the website
 ### Download all the files in the repository, run the "tfidf.py" to create the required zipped pickle file
