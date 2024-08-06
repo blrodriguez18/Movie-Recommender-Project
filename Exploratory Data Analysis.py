@@ -3,15 +3,23 @@ import pandas as pd
 import plotly.express as px
 import ast
 import plotly.graph_objects as go
+import zipfile
+import io
+import pandas as pd
 
+zip_file_path = 'movies1.csv.zip'
+csv_file_name = 'movies1.csv'
 
-# explanation expander
+with zipfile.ZipFile(zip_file_path, 'r') as z:
+    with z.open(csv_file_name) as f:
+        movies1 = pd.read_csv(f)
+
+# movies1 = pd.read_csv("/Users/beatrizrodriguez/Desktop/MoviesRecommend/movies1.csv")
 
 st.header("Here are some EDA graphs made with Plotly: ", divider="red")
 st.write("")
 st.write("")
 
-movies1 = pd.read_csv("/Users/beatrizrodriguez/Desktop/MoviesRecommend/movies1.csv")
 
 
 # BAR CHART 1
