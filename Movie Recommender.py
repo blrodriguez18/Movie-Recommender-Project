@@ -9,11 +9,11 @@ import zipfile
 import io
 import pandas as pd
 
-st.header("DO NOT RUN THIS PAGE DIRECTLY")
-st.subheader("For the recommender to work, please run the file tfidf.py for the required pickle file to be created.")
 
 x = st.text_input("Movie Title")
 st.write(f'Looking for recommendations if you like the movie: {x} ...')
+st.header("DO NOT RUN THIS PAGE DIRECTLY")
+st.subheader("For the recommender to work, please run the file tfidf.py for the required pickle file to be created.")
 
 zip_file_path1 = 'movies1.csv.zip'
 csv_file_name1 = 'movies1.csv'
