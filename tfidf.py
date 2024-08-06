@@ -1,4 +1,5 @@
 import pickle
+import gzip
 import pandas as pd
 import ast
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -7,9 +8,8 @@ from sklearn.decomposition import TruncatedSVD
 
 
 # @st.cache
-def load_data(file_path):
-    return pd.read_csv(file_path)
-
+# def load_data(file_path):
+#     return pd.read_csv(file_path)
 
 # @st.cache(allow_output_mutation=True)
 def process_data(movies1):
@@ -49,14 +49,20 @@ def create_tfidf_matrix(movies1):
 def calculate_cosine_similarity(tfidf_reduced):
     return cosine_similarity(tfidf_reduced)
 
+zip_file_path1 = 'movies1.csv.zip'
+csv_file_name1 = 'movies1.csv'
 
-movies1 = load_data("/Users/beatrizrodriguez/Desktop/MoviesRecommend/movies1.csv")
+with zipfile.ZipFile(zip_file_path2, 'r') as z:
+    with z.open(csv_file_name2) as f:
+        movies1 = pd.read_csv(f)
+        
+# movies1 = load_data("/Users/beatrizrodriguez/Desktop/MoviesRecommend/movies1.csv")
 movies1 = process_data(movies1)
 tfidf_reduced, feature_names = create_tfidf_matrix(movies1)
 cosine_sim_reduced_dim = calculate_cosine_similarity(tfidf_reduced)
 
-with open('cosine_sim.pkl', 'wb') as file:
+with gzip.open('cosine_sim.pkl', 'wb') as file:
     pickle.dump(cosine_sim_reduced_dim, file)
 
 # Save the processed dataframe
-movies1.to_csv('processed_movies.csv', index=False)
+# movies1.to_csv('processed_movies.csv', index=False)
